@@ -82,9 +82,9 @@ function rankToZhTW(tierPatched) {
     case "Diamond 2": return "鑽石 2";
     case "Diamond 3": return "鑽石 3";
 
-    case "Ascendant 1": return "超凡 1";
-    case "Ascendant 2": return "超凡 2";
-    case "Ascendant 3": return "超凡 3";
+    case "Ascendant 1": return "超凡入聖 1";
+    case "Ascendant 2": return "超凡入聖 2";
+    case "Ascendant 3": return "超凡入聖 3";
 
     case "Immortal 1": return "神話 1";
     case "Immortal 2": return "神話 2";
@@ -111,9 +111,9 @@ function rankToZhTW(tierPatched) {
     case "DIAMOND 1": return "鑽石 1";
     case "DIAMOND 2": return "鑽石 2";
     case "DIAMOND 3": return "鑽石 3";
-    case "ASCENDANT 1": return "超凡 1";
-    case "ASCENDANT 2": return "超凡 2";
-    case "ASCENDANT 3": return "超凡 3";
+    case "ASCENDANT 1": return "超凡入聖 1";
+    case "ASCENDANT 2": return "超凡入聖 2";
+    case "ASCENDANT 3": return "超凡入聖 3";
     case "IMMORTAL 1": return "神話 1";
     case "IMMORTAL 2": return "神話 2";
     case "IMMORTAL 3": return "神話 3";
