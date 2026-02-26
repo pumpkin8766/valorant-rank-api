@@ -1,0 +1,16 @@
+{
+  "name": "valorant-rank-api",
+  "version": "1.0.0",
+  "description": "Nightbot-friendly API that returns Valorant rank in plain text (<400 chars).",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  }
+}
