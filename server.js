@@ -49,6 +49,89 @@ function normalizeRegion(region) {
   return r;
 }
 
+function rankToZhTW(tierPatched) {
+  const t = String(tierPatched || "").trim();
+
+  // 有些情況會回 "Unrated" 或空字串
+  if (!t) return "未知:(";
+
+  switch (t) {
+    case "Unrated": return "未評級";
+
+    case "Iron 1": return "鐵牌 1";
+    case "Iron 2": return "鐵牌 2";
+    case "Iron 3": return "鐵牌 3";
+
+    case "Bronze 1": return "青銅 1";
+    case "Bronze 2": return "青銅 2";
+    case "Bronze 3": return "青銅 3";
+
+    case "Silver 1": return "白銀 1";
+    case "Silver 2": return "白銀 2";
+    case "Silver 3": return "白銀 3";
+
+    case "Gold 1": return "黃金 1";
+    case "Gold 2": return "黃金 2";
+    case "Gold 3": return "黃金 3";
+
+    case "Platinum 1": return "白金 1";
+    case "Platinum 2": return "白金 2";
+    case "Platinum 3": return "白金 3";
+
+    case "Diamond 1": return "鑽石 1";
+    case "Diamond 2": return "鑽石 2";
+    case "Diamond 3": return "鑽石 3";
+
+    case "Ascendant 1": return "超凡 1";
+    case "Ascendant 2": return "超凡 2";
+    case "Ascendant 3": return "超凡 3";
+
+    case "Immortal 1": return "神話 1";
+    case "Immortal 2": return "神話 2";
+    case "Immortal 3": return "神話 3";
+
+    case "Radiant": return "輻能";
+
+    // 有些來源可能會回傳大小寫/多空白不同（保險）
+    case "IRON 1": return "鐵牌 1";
+    case "IRON 2": return "鐵牌 2";
+    case "IRON 3": return "鐵牌 3";
+    case "BRONZE 1": return "青銅 1";
+    case "BRONZE 2": return "青銅 2";
+    case "BRONZE 3": return "青銅 3";
+    case "SILVER 1": return "白銀 1";
+    case "SILVER 2": return "白銀 2";
+    case "SILVER 3": return "白銀 3";
+    case "GOLD 1": return "黃金 1";
+    case "GOLD 2": return "黃金 2";
+    case "GOLD 3": return "黃金 3";
+    case "PLATINUM 1": return "白金 1";
+    case "PLATINUM 2": return "白金 2";
+    case "PLATINUM 3": return "白金 3";
+    case "DIAMOND 1": return "鑽石 1";
+    case "DIAMOND 2": return "鑽石 2";
+    case "DIAMOND 3": return "鑽石 3";
+    case "ASCENDANT 1": return "超凡 1";
+    case "ASCENDANT 2": return "超凡 2";
+    case "ASCENDANT 3": return "超凡 3";
+    case "IMMORTAL 1": return "神話 1";
+    case "IMMORTAL 2": return "神話 2";
+    case "IMMORTAL 3": return "神話 3";
+    case "RADIANT": return "輻能";
+    case "UNRATED": return "未評級";
+
+    default: {
+      // 再保險一次：統一大小寫後再判斷（仍維持 switch 寫法）
+      const u = t.toUpperCase();
+      switch (u) {
+        case "UNRATED": return "未評級";
+        case "RADIANT": return "輻能";
+        default: return t; // 不認得就原樣回傳，避免噴錯
+      }
+    }
+  }
+}
+
 function normalizeRiotIdPart(s, maxLen) {
   const v = String(s || "").trim();
   if (!v) return null;
@@ -120,7 +203,8 @@ async function fetchHenrikMMR(region, name, tag) {
 
   if (!mmr) return { ok: false, text: "找不到牌位資料" };
 
-  const tier = mmr.currenttierpatched || "Unknown";
+  const tierEn = mmr.currenttierpatched || "Unknown";
+  const tier = rankToZhTW(tierEn);
   const rr = mmr.ranking_in_tier ?? null;
   const elo = mmr.elo ?? null;
 
