@@ -93,9 +93,9 @@ function rankToZhTW(tierPatched) {
     ["GOLD 1", "黃金 1"], ["GOLD 2", "黃金 2"], ["GOLD 3", "黃金 3"],
     ["PLATINUM 1", "白金 1"], ["PLATINUM 2", "白金 2"], ["PLATINUM 3", "白金 3"],
     ["DIAMOND 1", "鑽石 1"], ["DIAMOND 2", "鑽石 2"], ["DIAMOND 3", "鑽石 3"],
-    ["ASCENDANT 1", "超凡 1"], ["ASCENDANT 2", "超凡 2"], ["ASCENDANT 3", "超凡 3"],
+    ["ASCENDANT 1", "超凡入聖 1"], ["ASCENDANT 2", "超凡入聖 2"], ["ASCENDANT 3", "超凡入聖 3"],
     ["IMMORTAL 1", "神話 1"], ["IMMORTAL 2", "神話 2"], ["IMMORTAL 3", "神話 3"],
-    ["RADIANT", "輻能"]
+    ["RADIANT", "輻能aaaa"]
   ]);
 
   return map.get(u) ?? t;
