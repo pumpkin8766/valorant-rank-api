@@ -145,17 +145,6 @@ const parts = [
 
 return { ok: true, text: parts.join("｜") };
 
-  // 組合成 Nightbot 友善輸出（短、純文字）
-  const riotId = `${name}#${tag}`;
-  const parts = [
-    `${riotId}｜${tier}`,
-    (rr !== null ? `RR ${rr}` : null),
-    (elo !== null ? `Elo ${elo}` : null)
-  ].filter(Boolean);
-
-  return { ok: true, text: parts.join("｜") };
-}
-
 // --- Routes ---
 app.get("/", (req, res) => {
   res.type("text/plain; charset=utf-8").send("OK");
