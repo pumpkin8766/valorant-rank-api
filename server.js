@@ -161,6 +161,35 @@ app.get("/rank", async (req, res) => {
     ipLastHit.set(ip, t);
   }
 
+  app.get("/rank_debug", async (req, res) => {
+  const region = normalizeRegion(req.query.region ?? DEFAULT_REGION);
+  const name = normalizeRiotIdPart(req.query.name ?? DEFAULT_NAME, 32);
+  const tag = normalizeRiotIdPart(req.query.tag ?? DEFAULT_TAG, 8);
+
+  if (!region || !name || !tag) {
+    res.status(400).json({ error: "bad params" });
+    return;
+  }
+
+  if (!HENRIK_API_KEY) {
+    res.status(500).json({ error: "missing HENRIK_API_KEY" });
+    return;
+  }
+
+  const url =
+    `https://api.henrikdev.xyz/valorant/v2/mmr/` +
+    `${encodeURIComponent(region)}/` +
+    `${encodeURIComponent(name)}/` +
+    `${encodeURIComponent(tag)}`;
+
+  const upstream = await fetch(url, {
+    headers: { Authorization: HENRIK_API_KEY }
+  });
+
+  const data = await upstream.json().catch(() => ({}));
+  res.status(upstream.status).json(data);
+});
+
   const region = normalizeRegion(req.query.region ?? DEFAULT_REGION);
   const name = normalizeRiotIdPart(req.query.name ?? DEFAULT_NAME, 32);
   const tag = normalizeRiotIdPart(req.query.tag ?? DEFAULT_TAG, 8);
