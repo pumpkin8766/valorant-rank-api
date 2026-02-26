@@ -121,12 +121,29 @@ async function fetchHenrikMMR(region, name, tag) {
 
   // 依 HenrikDev v2 mmr 回傳格式抓重點
   // data.data.currenttierpatched, data.data.ranking_in_tier, data.data.elo
-  const mmr = data?.data;
-  if (!mmr) return { ok: false, text: "找不到牌位資料" };
+  const payload = data?.data ?? null;
 
-  const tier = mmr.currenttierpatched || "Unknown";
-  const rr = (mmr.ranking_in_tier ?? null);
-  const elo = (mmr.elo ?? null);
+// 新格式：data.current_data
+// 舊格式：data
+const mmr =
+  payload?.current_data ??
+  payload ??
+  null;
+
+if (!mmr) return { ok: false, text: "找不到牌位資料" };
+
+const tier = mmr.currenttierpatched || "Unknown";
+const rr = (mmr.ranking_in_tier ?? null);
+const elo = (mmr.elo ?? null);
+
+const riotId = `${name}#${tag}`;
+const parts = [
+  `${riotId}｜${tier}`,
+  (rr !== null ? `RR ${rr}` : null),
+  (elo !== null ? `Elo ${elo}` : null)
+].filter(Boolean);
+
+return { ok: true, text: parts.join("｜") };
 
   // 組合成 Nightbot 友善輸出（短、純文字）
   const riotId = `${name}#${tag}`;
