@@ -213,8 +213,8 @@ async function fetchHenrikMatchesSince(region, platform, name, tag, startedAtMs,
   if (!HENRIK_API_KEY) return { ok: false, text: "伺服器未設定 API Key（HENRIK_API_KEY）" };
 
   const SIZE = 10;               // v4 size max 10
-  const MAX_PAGES = 30;          // 最多 30 頁 = 300 場
-  const MAX_TOTAL_MATCHES = 300; // 再多就截斷避免刷爆
+  const MAX_PAGES = 6;          // 最多 30 頁 = 300 場
+  const MAX_TOTAL_MATCHES = 60; // 再多就截斷避免刷爆
   const matches = [];
 
   for (let page = 0; page < MAX_PAGES; page++) {
@@ -449,7 +449,7 @@ app.get("/record", async (req, res) => {
   const since = fmtTimeTaipei(startedAt);
   const text = `📊 本次開台戰績（自 ${since}）｜勝 ${wins} 敗 ${losses}｜共 ${counted} 場`;
 
-  recordCache = { key: cacheKey, expiresAt: now + 30_000, text };
+  recordCache = { key: cacheKey, expiresAt: now + 90_000, text };
   res.type("text/plain; charset=utf-8").send(clampText(text));
 });
 
